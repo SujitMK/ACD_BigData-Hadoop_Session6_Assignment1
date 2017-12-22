@@ -1,7 +1,12 @@
+// checking the databases
+
 hive> show databases;
 OK
 default
 Time taken: 0.011 seconds, Fetched: 1 row(s)
+
+// creating a custom schema
+
 hive> create database custom;
 OK
 Time taken: 2.419 seconds
@@ -11,19 +16,30 @@ custom
 default
 Time taken: 0.011 seconds, Fetched: 2 row(s)
 
+// using a custom table for the activities
+
 hive> use custom;
 OK
 Time taken: 0.021 seconds
+
+// creating the table temperature_data table
+
 hive> create table temperature_data (date string, zip_code int, temperature int)
     > row format delimited
     > fields terminated by ',';
 OK
 Time taken: 0.234 seconds
+
+// Loading the data from local path into the temperature_data table
+
 hive> LOAD DATA local INPATH '/home/cloudera/Downloads/Dataset.txt' into table temperature_data;
 Loading data to table custom.temperature_data
 Table custom.temperature_data stats: [numFiles=1, totalSize=437]
 OK
 Time taken: 2.659 seconds
+
+// selecting and displaying the table data
+
 hive> select * from temperature_data;
 OK
 10-01-1990	123112	10
